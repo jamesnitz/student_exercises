@@ -16,40 +16,43 @@ student1 = Student('james', 'Nitz', 'jnitz')
 student2 = Student('Slick', 'bigman', 'slickyb')
 student3 = Student('kevin', 'penny', 'keveloper')
 student4 = Student('slab', 'onDeck', 'bruh')
-cohort1.students.append(student1)
-cohort1.students.append(student2)
-cohort2.students.append(student3)
-cohort3.students.append(student4)
 
 mo = Instructor('mo', 'money', 'Moooo', 'smart')
 willy = Instructor('willy', 'metcalf', 'wizzle', 'raves')
 william = Instructor('William', 'green', 'wgreen', 'being late')
 
+cohort1.students.append(student1)
+cohort2.students.append(student2)
+cohort3.students.append(student3)
+cohort3.students.append(student4)
+
 cohort1.instructors.append(mo)
 cohort2.instructors.append(willy)
 cohort3.instructors.append(william)
 
-mo.assign_exercise(student1, nutshell)
-mo.assign_exercise(student1, reactnutshell)
-mo.assign_exercise(student2, bangazon)
-mo.assign_exercise(student3, trestlebridge)
-mo.assign_exercise(student4, trestlebridge)
+william.assign_exercise(student1, bangazon)
+william.assign_exercise(student1, nutshell)
 
-students = []
-students.append(student1)
-students.append(student2)
-students.append(student3)
-students.append(student4)
+mo.assign_exercise(student2, nutshell)
+mo.assign_exercise(student2, reactnutshell)
 
-exercises = []
-exercises.append(nutshell)
-exercises.append(reactnutshell)
-exercises.append(bangazon)
-exercises.append(trestlebridge)
+willy.assign_exercise(student3, trestlebridge)
+willy.assign_exercise(student3, reactnutshell)
 
-for student in students:
-  print(f'{student.first_name} {student.last_name} is working on:')
-  for exercise in student.exercises:
-    print(f'{exercise.name}')
-  print()
-  
+william.assign_exercise(student4, bangazon)
+william.assign_exercise(student4, trestlebridge)
+
+all_students = [student1, student2, student3, student4]
+all_exercises = [nutshell, reactnutshell, bangazon, trestlebridge]
+
+for student in all_students:
+  report = f'{student.first_name} is working on '
+  student_working_exercises = set(student.exercises)
+  exercises = set(all_exercises)
+  exercise_list = list(student_working_exercises.intersection(exercises))
+  for exercise in exercise_list:
+    report += f'{exercise.name}, '
+  report = report[slice(-2)] + f'.'
+  print(report)
+  print('')
+  print('')
